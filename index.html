@@ -1,1 +1,107 @@
-おおいやま
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vocabulary Stream</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #e2e8f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      width: 400px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .word {
+      font-size: 32px;
+      margin: 20px 0;
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Vocabulary Stream</h1>
+    <div class="word" id="word">...</div>
+    <input type="text" id="answer" placeholder="意味を入力">
+    <br>
+    <button onclick="checkAnswer()">Check</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const words = [
+      {word: "abandon", meaning: "捨てる"},
+      {word: "derive", meaning: "引き出す"},
+      {word: "inevitable", meaning: "避けられない"},
+      {word: "contemplate", meaning: "熟考する"},
+      {word: "subtle", meaning: "微妙な"}
+    ];
+
+    let current = {};
+
+    function nextWord() {
+      current = words[Math.floor(Math.random() * words.length)];
+      document.getElementById("word").textContent = current.word;
+      document.getElementById("answer").value = "";
+      document.getElementById("result").textContent = "";
+    }
+
+    function checkAnswer() {
+      const input = document.getElementById("answer").value;
+      if (input === current.meaning) {
+        document.getElementById("result").textContent = "Correct.";
+        setTimeout(nextWord, 1000);
+      } else {
+        document.getElementById("result").textContent = "Try again.";
+      }
+    }
+
+    nextWord();
+  </script>
+</body>
+</html>
